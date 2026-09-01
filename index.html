@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Preetideepa Mishra — Multidisciplinary Design</title>
+  <meta name="description" content="Preetideepa Mishra is a multidisciplinary designer blending UX/UI, visual identity, and physical design to create thoughtful, human-centered experiences.." />
+
+  <!-- Fonts: Fraunces (display serif) + Archivo (body/UI grotesk) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="site-header">
+    <div class="wrap header-row">
+      <a href="#home" class="wordmark">Preetideepa Mishra</a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Open menu">
+        <span></span><span></span>
+      </button>
+
+      <nav class="primary-nav" id="primaryNav">
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section id="home" class="hero">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="wrap hero-inner">
+        <p class="hero-meta">Jaipur, India — currently taking on new projects</p>
+        <h1 class="hero-title">
+          I design across<br>
+          screens, systems<br>
+          and objects.
+        </h1>
+        <p class="hero-sub">
+          A multidisciplinary practice spanning user research, UX/UI design, brand identity,
+          and physical prototyping for teams who need one person to think in both pixels and materials.
+        </p>
+        <div class="hero-actions">
+          <a href="#work" class="link-underline">View the work</a>
+          <a href="#contact" class="link-underline">Start a project</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section id="about" class="about">
+      <div class="wrap about-grid">
+        <div class="about-copy">
+          <h2>About</h2>
+          <p>
+            I'm a designer who moves fluidly between disciplines because most real problems don't
+            respect discipline boundaries. My work usually starts with research sitting with users,
+            watching how they actually behave and ends somewhere concrete: a shipped interface,
+            a brand system, or a physical object that's been through a dozen prototypes.
+          </p>
+          <p>
+            Over the past several years I've worked with early-stage startups and established teams
+            to define products, build the visual language around them, and get ideas out of Figma
+            and into hands whether that means a working click-through prototype or a 3D-printed
+            enclosure. I care about the seams the moment a digital decision has to hold up in the
+            physical world, and vice versa.
+          </p>
+        </div>
+
+        <dl class="about-facts">
+          <div class="fact">
+            <dt>Based in</dt>
+            <dd>Jaipur, India — working with teams globally</dd>
+          </div>
+          <div class="fact">
+            <dt>Focus areas</dt>
+            <dd>User research, UX/UI, brand identity, prototyping</dd>
+          </div>
+          <div class="fact">
+            <dt>Tools</dt>
+            <dd>Figma, Adobe CC, Keyshot, Spline, ShapesXr, Unreal Engine, Fusion 360 </dd>
+          </div>
+          <div class="fact">
+            <dt>Currently</dt>
+            <dd>Open for freelance and contract work</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ============ WORK ============ -->
+    <section id="work" class="work">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Selected work</h2>
+          <p>A mix of digital products, brand systems, and physical prototypes. Click a project for the full case study.</p>
+        </div>
+
+        <div class="work-grid" id="workGrid">
+          <!-- Card 1 -->
+          <article class="work-card" data-project="0" tabindex="0" role="button" aria-haspopup="dialog">
+            <div class="thumb thumb-digital-1">
+              <span class="thumb-mark">01</span>
+            </div>
+            <div class="work-card-body">
+              <p class="work-kicker">Market Research</p>
+              <h3>Kaam Sathi</h3>
+              <p class="work-desc">Conduct end-to-end market user research from scratch on contemporary problem areas. Students will identify a research focus, design tools for data collection (questionnaires, interviews), collect primary data in the real world, analyze findings, and deliver structured outputs (personas, empathy maps, IA).</p>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="work-card" data-project="1" tabindex="0" role="button" aria-haspopup="dialog">
+            <div class="thumb thumb-brand-1">
+              <span class="thumb-mark">02</span>
+            </div>
+            <div class="work-card-body">
+              <p class="work-kicker">Brand identity</p>
+              <h3>Lijjat Papad</h3>
+              <p class="work-desc">A fresh, contemporary take on India’s most iconic papad brand.
+Combines heritage + handmade art + strong Indian woman representation.</p>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="work-card" data-project="2" tabindex="0" role="button" aria-haspopup="dialog">
+            <div class="thumb thumb-physical-1">
+              <span class="thumb-mark">03</span>
+            </div>
+            <div class="work-card-body">
+              <p class="work-kicker">Physical / 3D</p>
+              <h3>Dinodrip</h3>
+              <p class="work-desc">Dinodrip is an ergonomic, modular dispensing system designed to transform flexible refill pouches into stable, easy-to-use containers. It provides structural support, controlled pumping, and clean storage, enabling users to handle, store, and dispense liquid products efficiently while promoting sustainable consumption.</p>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="work-card" data-project="3" tabindex="0" role="button" aria-haspopup="dialog">
+            <div class="thumb thumb-digital-2">
+              <span class="thumb-mark">04</span>
+            </div>
+            <div class="work-card-body">
+              <p class="work-kicker">Ethnographic Research</p>
+              <h3>Quickie</h3>
+              <p class="work-desc">Frequent cab users face difficulty in finding the best ride option because prices vary across multiple platforms like Uber, Ola, InDrive, and Rapido. As a result, they are forced to open multiple apps, manually compare prices, and switch back and forth before making a decision. This repeated process makes cab booking inefficient, time-consuming, and mentally exhausting. The core issue lies in the absence of a single platform that provides real-time price comparison, leading users to rely on a repetitive and fragmented booking experience every time they need a ride.</p>
+            </div>
+          </article>
+
+          <!-- Card 5 -->
+          <article class="work-card" data-project="4" tabindex="0" role="button" aria-haspopup="dialog">
+            <div class="thumb thumb-brand-2">
+              <span class="thumb-mark">05</span>
+            </div>
+            <div class="work-card-body">
+              <p class="work-kicker">Mini Campaign</p>
+              <h3>Pepsi</h3>
+              <p class="work-desc">
+Iconic cola taste offered in three lifestyles variants —
+Classic refreshment (Normal), guilt-free lightness (Diet), and bold sugar-free kick (Zero Sugar) — unified by Pepsi’s energetic, youthful brand identity.</p>
+            </div>
+          </article>
+
+          <!-- Card 6 -->
+          <article class="work-card" data-project="5" tabindex="0" role="button" aria-haspopup="dialog">
+            <div class="thumb thumb-physical-2">
+              <span class="thumb-mark">06</span>
+            </div>
+            <div class="work-card-body">
+              <p class="work-kicker">Website Redesign</p>
+              <h3>Craiglist</h3>
+              <p class="work-desc">Craigslist is an American classified advertisements website that was founded in 1995 by Craig Newmark. Jim Buckmaster, who became CEO in 2000, further shaped the platform with his focus on simplicity, community-driven design, and steady growth. The website allows users to post ads for jobs, housing, items for sale, services, and more, in various categories and cities around the world. </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SERVICES ============ -->
+    <section id="services" class="services">
+      <div class="wrap services-grid">
+        <div class="services-intro">
+          <h2>Services</h2>
+          <p>
+            I take on projects end-to-end or join partway through — as the researcher, the designer,
+            or the person who gets a prototype into a usable state. Below is how a typical engagement
+            is scoped and how it tends to unfold.
+          </p>
+
+          <dl class="offer-list">
+            <div class="offer">
+              <dt>UX / UI design</dt>
+              <dd>Product design from flows and wireframes through to polished, developer-ready interfaces.</dd>
+            </div>
+            <div class="offer">
+              <dt>Brand strategy &amp; identity</dt>
+              <dd>Naming, positioning, visual identity systems, and the guidelines to keep them consistent.</dd>
+            </div>
+            <div class="offer">
+              <dt>User research</dt>
+              <dd>Interviews, usability testing, and synthesis that turns observation into design direction.</dd>
+            </div>
+            <div class="offer">
+              <dt>Physical prototyping</dt>
+              <dd>CAD modelling, 3D printing, and iterative physical prototypes for products and fixtures.</dd>
+            </div>
+          </dl>
+        </div>
+
+        <ol class="process-list">
+          <li class="process-step">
+            <span class="step-num">01</span>
+            <div>
+              <h3>Discovery</h3>
+              <p>Understanding the problem, the constraints, and who the work is actually for, before anything is designed.</p>
+            </div>
+          </li>
+          <li class="process-step">
+            <span class="step-num">02</span>
+            <div>
+              <h3>Definition</h3>
+              <p>Turning research into a clear brief — scope, success criteria, and a shared point of view.</p>
+            </div>
+          </li>
+          <li class="process-step">
+            <span class="step-num">03</span>
+            <div>
+              <h3>Design</h3>
+              <p>Concepting and iterating in the right fidelity for the question — sketches, flows, or full UI.</p>
+            </div>
+          </li>
+          <li class="process-step">
+            <span class="step-num">04</span>
+            <div>
+              <h3>Prototype &amp; test</h3>
+              <p>Building something real enough to react to, digital or physical, and refining from feedback.</p>
+            </div>
+          </li>
+          <li class="process-step">
+            <span class="step-num">05</span>
+            <div>
+              <h3>Handoff</h3>
+              <p>Documentation, files, and specs your team can build from without me in the room.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section id="contact" class="contact">
+      <div class="wrap contact-grid">
+        <div class="contact-intro">
+          <h2>Let's work together</h2>
+          <p>
+            Tell me a little about what you're working on. I read every message and usually
+            reply within two business days.
+          </p>
+
+          <ul class="contact-links">
+            <li>
+              <a href="mailto:hello@norakessler.design">hello@norakessler.design</a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </li>
+            <li>
+              <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </li>
+          </ul>
+        </div>
+
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="form-row">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required autocomplete="name" />
+          </div>
+
+          <div class="form-row">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required autocomplete="email" />
+          </div>
+
+          <div class="form-row">
+            <label for="message">What are you working on?</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary">Send message</button>
+          <p class="form-note" id="formNote" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <p>&copy; <span id="year"></span> Nora Kessler. Built and hosted with GitHub Pages.</p>
+      <a href="#home" class="link-underline">Back to top</a>
+    </div>
+  </footer>
+
+  <!-- ============ CASE STUDY MODAL ============ -->
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" aria-label="Close case study">&times;</button>
+      <p class="work-kicker" id="modalKicker"></p>
+      <h3 id="modalTitle"></h3>
+      <div class="modal-thumb" id="modalThumb"></div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
