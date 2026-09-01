@@ -1,0 +1,648 @@
+/* ==========================================================================
+   DESIGN TOKENS
+   A stone-paper / drafting-blue palette — a nod to the physical prototyping
+   side of the practice (blueprints, technical drawing) rather than a
+   generic "designer portfolio" look.
+   ========================================================================== */
+:root {
+  /* Color */
+  --paper:      #EDEADF;   /* page background — warm stone, not peach-cream */
+  --card:       #F5F3EC;   /* surface slightly lighter than paper */
+  --ink:        #1C1F1A;   /* near-black body/heading text, warm cast */
+  --ink-soft:   #52564C;   /* secondary text */
+  --line:       #C7BFA9;   /* hairline rules / borders */
+  --blueprint:  #2E4B6E;   /* primary accent */
+  --blueprint-dim: #23394F;
+  --mustard:    #C9862C;   /* signature accent, used sparingly */
+
+  /* Type */
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Layout */
+  --wrap-width: 1120px;
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.75rem;
+  --space-4: 3rem;
+  --space-5: 5rem;
+  --space-6: 8rem;
+
+  --radius-sm: 3px;
+  --radius-md: 6px;
+}
+
+/* ==========================================================================
+   RESET & BASE
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.08;
+  margin: 0 0 var(--space-2);
+  color: var(--ink);
+}
+
+h2 {
+  font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+  font-weight: 500;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+p {
+  margin: 0 0 var(--space-2);
+  max-width: 60ch;
+  color: var(--ink-soft);
+}
+
+a {
+  color: inherit;
+}
+
+img { max-width: 100%; display: block; }
+
+.wrap {
+  width: 100%;
+  max-width: var(--wrap-width);
+  margin: 0 auto;
+  padding: 0 var(--space-3);
+}
+
+/* Focus visibility — kept consistent, never suppressed */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--blueprint);
+  outline-offset: 3px;
+}
+
+/* Underline-reveal link style used for primary text links */
+.link-underline {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 500;
+  padding-bottom: 2px;
+  background-image: linear-gradient(var(--ink), var(--ink));
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  transition: background-size 0.25s ease, color 0.25s ease;
+}
+.link-underline:hover {
+  color: var(--blueprint-dim);
+  background-image: linear-gradient(var(--blueprint), var(--blueprint));
+  background-size: 100% 2px;
+}
+
+/* ==========================================================================
+   HEADER / NAV
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(237, 234, 223, 0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line);
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-2);
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  text-decoration: none;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.primary-nav {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.primary-nav a {
+  text-decoration: none;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  transition: color 0.2s ease;
+}
+.primary-nav a:hover { color: var(--ink); }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.nav-toggle span {
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  margin: 0 auto;
+  background: var(--ink);
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--line);
+}
+
+/* Signature motif: a fine drafting grid, confined to the hero only */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.28;
+  mask-image: linear-gradient(to bottom, black, transparent 88%);
+  -webkit-mask-image: linear-gradient(to bottom, black, transparent 88%);
+}
+
+.hero-inner {
+  position: relative;
+}
+
+.hero-meta {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  margin-bottom: var(--space-3);
+}
+
+.hero-title {
+  font-size: clamp(2.6rem, 6.4vw, 5.1rem);
+  max-width: 14ch;
+  letter-spacing: -0.015em;
+}
+
+.hero-sub {
+  margin-top: var(--space-3);
+  font-size: 1.1rem;
+  max-width: 46ch;
+  color: var(--ink-soft);
+}
+
+.hero-actions {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+/* ==========================================================================
+   ABOUT
+   ========================================================================== */
+.about {
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: var(--space-5);
+  align-items: start;
+}
+
+.about-facts {
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+
+.fact {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.fact dt {
+  font-weight: 600;
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+
+.fact dd {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   WORK
+   ========================================================================== */
+.work {
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.section-head {
+  max-width: 56ch;
+  margin-bottom: var(--space-5);
+}
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4) var(--space-3);
+}
+
+.work-card {
+  cursor: pointer;
+  border: 1px solid var(--line);
+  background: var(--card);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.work-card:hover,
+.work-card:focus-visible {
+  border-color: var(--blueprint);
+  transform: translateY(-2px);
+}
+
+.thumb {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-2);
+}
+
+.thumb-mark {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.85);
+}
+
+/* Placeholder thumbnail treatments — distinct per project, tied to category */
+.thumb-digital-1  { background: linear-gradient(155deg, #3B5A7E, #24344A); }
+.thumb-digital-2  { background: linear-gradient(155deg, #4A6E93, #2C425C); }
+.thumb-brand-1    { background: linear-gradient(155deg, #C9862C, #93601C); }
+.thumb-brand-2    { background: linear-gradient(155deg, #A9762F, #6E4B18); }
+.thumb-physical-1 { background: linear-gradient(155deg, #5B5748, #34322A); }
+.thumb-physical-2 { background: linear-gradient(155deg, #6B6A5A, #403F35); }
+
+.work-card-body {
+  padding: var(--space-3);
+}
+
+.work-kicker {
+  font-size: 0.82rem;
+  color: var(--blueprint-dim);
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.work-card h3 {
+  font-size: 1.08rem;
+  margin-bottom: 0.4rem;
+}
+
+.work-desc {
+  font-size: 0.92rem;
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   SERVICES
+   ========================================================================== */
+.services {
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+  align-items: start;
+}
+
+.offer-list {
+  margin: var(--space-4) 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.offer {
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.offer dt {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.offer dd {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.process-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.process-step {
+  display: grid;
+  grid-template-columns: 2.6rem 1fr;
+  gap: var(--space-2);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--line);
+}
+.process-step:first-child { border-top: 1px solid var(--line); }
+
+.step-num {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--mustard);
+  font-size: 1.05rem;
+}
+
+.process-step h3 { font-size: 1.05rem; margin-bottom: 0.25rem; }
+.process-step p { font-size: 0.92rem; margin-bottom: 0; }
+
+/* ==========================================================================
+   CONTACT
+   ========================================================================== */
+.contact {
+  padding: var(--space-6) 0;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: var(--space-5);
+  align-items: start;
+}
+
+.contact-links {
+  list-style: none;
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.contact-links a {
+  text-decoration: none;
+  font-size: 1.05rem;
+  font-weight: 500;
+  border-bottom: 1px solid var(--line);
+  display: inline-block;
+  padding-bottom: 2px;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.contact-links a:hover {
+  color: var(--blueprint-dim);
+  border-color: var(--blueprint);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-row label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.form-row input,
+.form-row textarea {
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--card);
+  color: var(--ink);
+  resize: vertical;
+}
+
+.form-row input:focus,
+.form-row textarea:focus {
+  outline: none;
+  border-color: var(--blueprint);
+}
+
+.btn-primary {
+  align-self: flex-start;
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--paper);
+  background: var(--blueprint);
+  border: none;
+  padding: 0.85rem 1.6rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.btn-primary:hover { background: var(--blueprint-dim); }
+
+.form-note {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  min-height: 1.2em;
+  margin: 0;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: var(--space-3) 0;
+}
+
+.footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.footer-row p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+/* ==========================================================================
+   CASE STUDY MODAL
+   ========================================================================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(28, 31, 26, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3);
+}
+.modal-backdrop.open { display: flex; }
+
+.modal {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  max-width: 640px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: var(--space-4);
+}
+
+.modal-close {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--card);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--ink);
+}
+.modal-close:hover { border-color: var(--blueprint); color: var(--blueprint); }
+
+.modal-thumb {
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-sm);
+  margin: var(--space-2) 0 var(--space-3);
+}
+
+.modal-body p { max-width: none; }
+.modal-body h4 {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  text-transform: none;
+  color: var(--ink);
+  margin: var(--space-2) 0 0.3rem;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 860px) {
+  .about-grid,
+  .services-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .work-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --space-6: 4.5rem;
+  }
+
+  .primary-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    flex-direction: column;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+  }
+  .primary-nav.open { max-height: 260px; }
+  .primary-nav a {
+    padding: var(--space-2) var(--space-3);
+    border-top: 1px solid var(--line);
+  }
+
+  .nav-toggle { display: flex; }
+
+  .hero-actions { flex-direction: column; gap: var(--space-2); }
+
+  .work-grid { grid-template-columns: 1fr; }
+
+  .fact { grid-template-columns: 1fr; gap: 0.25rem; }
+
+  .footer-row { flex-direction: column; align-items: flex-start; }
+}
