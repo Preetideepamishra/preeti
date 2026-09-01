@@ -1,0 +1,196 @@
+/* ==========================================================================
+   Preetideepa Mishra — portfolio site
+   Vanilla JS: mobile nav toggle, case-study modal, contact form handling.
+   No external dependencies — safe to host as-is on GitHub Pages.
+   ========================================================================== */
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  /* ---------- Footer year ---------- */
+  var yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  /* ---------- Mobile nav toggle ---------- */
+  var navToggle = document.getElementById('navToggle');
+  var primaryNav = document.getElementById('primaryNav');
+
+  if (navToggle && primaryNav) {
+    navToggle.addEventListener('click', function () {
+      var isOpen = primaryNav.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    // Close the mobile menu after a nav link is tapped
+    primaryNav.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        primaryNav.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  /* ---------- Case study data ----------
+     Keyed by the data-project index on each .work-card in index.html.
+     Replace this content with real case studies as the portfolio grows. */
+  var projects = [
+    {
+      kicker: 'Market Research',
+      title: 'Kaam Sathi',
+      thumbClass: 'thumb-digital-1',
+      role: 'Product design, UX research',
+      timeline: '4 months, 2024',
+      body:
+        'Conduct end-to-end market user research from scratch on contemporary problem areas. Students will identify a research focus, design tools for data collection (questionnaires, interviews), collect primary data in the real world, analyze findings, and deliver structured outputs (personas, empathy maps, IA).'
+    },
+    {
+      kicker: 'Brand identity',
+      title: 'Lijjat Papad',
+      thumbClass: 'thumb-brand-1',
+      role: 'Naming, identity, packaging',
+      timeline: '6 weeks, 2023',
+      body:
+        'A fresh, contemporary take on India’s most iconic papad brand.
+Combines heritage + handmade art + strong Indian woman representation.'
+    },
+    {
+      kicker: 'Physical / 3D',
+      title: 'Loop — modular desk lamp',
+      thumbClass: 'thumb-physical-1',
+      role: 'Dinodrip',
+      timeline: '5 months, 2023',
+      body:
+        'Dinodrip is an ergonomic, modular dispensing system designed to transform flexible refill pouches into stable, easy-to-use containers. It provides structural support, controlled pumping, and clean storage, enabling users to handle, store, and dispense liquid products efficiently while promoting sustainable consumption.'
+    },
+    {
+      kicker: 'Ethnographic Research',
+      title: 'Quickie',
+      thumbClass: 'thumb-digital-2',
+      role: 'End-to-end UX/UI',
+      timeline: '3 months, 2022',
+      body:
+        'Frequent cab users face difficulty in finding the best ride option because prices vary across multiple platforms like Uber, Ola, InDrive, and Rapido. As a result, they are forced to open multiple apps, manually compare prices, and switch back and forth before making a decision. This repeated process makes cab booking inefficient, time-consuming, and mentally exhausting. The core issue lies in the absence of a single platform that provides real-time price comparison, leading users to rely on a repetitive and fragmented booking experience every time they need a ride.'
+    },
+    {
+      kicker: 'Mini Campaign',
+      title: 'Pepsi',
+      thumbClass: 'thumb-brand-2',
+      role: 'Identity, signage, wayfinding',
+      timeline: '8 weeks, 2022',
+      body:
+        'Iconic cola taste offered in three lifestyles variants —
+Classic refreshment (Normal), guilt-free lightness (Diet), and bold sugar-free kick (Zero Sugar) — unified by Pepsi’s energetic, youthful brand identity.'
+    },
+    {
+      kicker: 'Website Redesign',
+      title: 'Craiglist',
+      thumbClass: 'thumb-physical-2',
+      role: 'Product design, prototyping',
+      timeline: '7 months, 2021',
+      body:
+        'Craigslist is an American classified advertisements website that was founded in 1995 by Craig Newmark. Jim Buckmaster, who became CEO in 2000, further shaped the platform with his focus on simplicity, community-driven design, and steady growth. The website allows users to post ads for jobs, housing, items for sale, services, and more, in various categories and cities around the world.'
+    }
+  ];
+
+  /* ---------- Case study modal ---------- */
+  var backdrop = document.getElementById('modalBackdrop');
+  var modalClose = document.getElementById('modalClose');
+  var modalKicker = document.getElementById('modalKicker');
+  var modalTitle = document.getElementById('modalTitle');
+  var modalThumb = document.getElementById('modalThumb');
+  var modalBody = document.getElementById('modalBody');
+  var lastFocused = null;
+
+  function openModal(index) {
+    var project = projects[index];
+    if (!project) return;
+
+    modalKicker.textContent = project.kicker;
+    modalTitle.textContent = project.title;
+
+    modalThumb.className = 'modal-thumb ' + project.thumbClass;
+
+    // Build body: role/timeline meta line + paragraphs from project.body
+    var paragraphs = project.body.split('\n\n').map(function (p) {
+      return '<p>' + p + '</p>';
+    }).join('');
+
+    modalBody.innerHTML =
+      '<h4>Role — ' + project.role + ' · ' + project.timeline + '</h4>' +
+      paragraphs;
+
+    lastFocused = document.activeElement;
+    backdrop.classList.add('open');
+    modalClose.focus();
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+    if (lastFocused) lastFocused.focus();
+  }
+
+  document.querySelectorAll('.work-card').forEach(function (card) {
+    var index = parseInt(card.getAttribute('data-project'), 10);
+
+    card.addEventListener('click', function () {
+      openModal(index);
+    });
+
+    // Keyboard support since cards act as buttons
+    card.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModal(index);
+      }
+    });
+  });
+
+  if (modalClose) modalClose.addEventListener('click', closeModal);
+
+  if (backdrop) {
+    backdrop.addEventListener('click', function (e) {
+      if (e.target === backdrop) closeModal();
+    });
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && backdrop.classList.contains('open')) {
+      closeModal();
+    }
+  });
+
+  /* ---------- Contact form ----------
+     No backend on GitHub Pages, so the form composes a mailto: link with
+     the visitor's message pre-filled. Swap this for a service like
+     Formspree/Netlify Forms if you want submissions delivered without
+     opening the visitor's mail client. */
+  var form = document.getElementById('contactForm');
+  var formNote = document.getElementById('formNote');
+
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var name = document.getElementById('name').value.trim();
+      var email = document.getElementById('email').value.trim();
+      var message = document.getElementById('message').value.trim();
+
+      if (!name || !email || !message) {
+        formNote.textContent = 'Please fill in every field before sending.';
+        return;
+      }
+
+      var subject = encodeURIComponent('New project inquiry from ' + name);
+      var body = encodeURIComponent(
+        message + '\n\n— ' + name + ' (' + email + ')'
+      );
+
+      window.location.href =
+        'mailto:hello@norakessler.design?subject=' + subject + '&body=' + body;
+
+      formNote.textContent = 'Opening your email client to send this message…';
+    });
+  }
+
+});
